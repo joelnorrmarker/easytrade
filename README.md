@@ -175,3 +175,4 @@ can also handle XML requests. Data types are negotiated based on `Accept` and `C
 | [CreditCardOrderService](./docs/credit-card-order-service.md) | `application/xml`                                  |
 | [OfferService](./docs/offerservice.md)                        | `application/xml`; `text/xml`                      |
 | [PricingService](./docs/pricing-service.md)                   | `application/xml`                                  |
+# EasyTradeTask
