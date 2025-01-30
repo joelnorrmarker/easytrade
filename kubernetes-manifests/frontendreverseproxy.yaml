@@ -27,16 +27,23 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
+    service.beta.kubernetes.io/aws-load-balancer-subnets: "subnet-068565d4782ef18a5, subnet-0df2ab5a47b597aac"
+    service.beta.kubernetes.io/aws-load-balancer-type: "alb"
+  #  service.beta.kubernetes.io/aws-load-balancer-healthcheck-protocol: "http"
+  #  service.beta.kubernetes.io/aws-load-balancer-healthcheck-path: "/healthz"
   name: frontendreverseproxy-easytrade
-  # Uncomment the annotations block to allow the service
-  # to be exposed publicly if deployed on EKS
-  # annotations:
-  #   service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
+  namespace: easytrade
 spec:
-  type: LoadBalancer
+  externalTrafficPolicy: Cluster
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
   selector:
     app: frontendreverseproxy
-  ports:
-    - name: http
-      port: 80
-      targetPort: 80
+  type: LoadBalancer
+
+
+

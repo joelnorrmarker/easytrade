@@ -11,6 +11,7 @@ spec:
       labels:
         app: accountservice
     spec:
+      serviceAccountName: webapp-sa
       containers:
         - name: accountservice
           image: europe-docker.pkg.dev/dynatrace-demoability/docker/easytrade/accountservice:4d5adb3
