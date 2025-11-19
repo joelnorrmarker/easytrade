@@ -1,6 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: easytrade        # <--- THIS FIXES THE ERROR
+namespace: easytrade
 
 resources:
 - accountservice.yaml
@@ -26,60 +26,60 @@ resources:
 - third-party-service.yaml
 
 images:
-  - name: easytrade/accountservice
+  - name: accountservice
     newName: dynatrace/easytrade-accountservice
     newTag: latest
-  - name: easytrade/aggregator-service
+  - name: aggregator-service
     newName: dynatrace/easytrade-aggregator-service
     newTag: latest
-  - name: easytrade/broker-service
+  - name: broker-service
     newName: dynatrace/easytrade-broker-service
     newTag: latest
-  - name: easytrade/calculationservice
+  - name: calculationservice
     newName: dynatrace/easytrade-calculationservice
     newTag: latest
-  - name: easytrade/contentcreator
+  - name: contentcreator
     newName: dynatrace/easytrade-contentcreator
     newTag: latest
-  - name: easytrade/credit-card-order-service
+  - name: credit-card-order-service
     newName: dynatrace/easytrade-credit-card-order-service
     newTag: latest
-  - name: easytrade/db
+  - name: db
     newName: dynatrace/easytrade-db
     newTag: latest
-  - name: easytrade/engine
+  - name: engine
     newName: dynatrace/easytrade-engine
     newTag: latest
-  - name: easytrade/feature-flag-service
+  - name: feature-flag-service
     newName: dynatrace/easytrade-feature-flag-service
     newTag: latest
-  - name: easytrade/frontend
+  - name: frontend
     newName: dynatrace/easytrade-frontend
     newTag: latest
-  - name: easytrade/frontendreverseproxy
+  - name: frontendreverseproxy
     newName: dynatrace/easytrade-frontendreverseproxy
     newTag: latest
-  - name: easytrade/loadgen
+  - name: loadgen
     newName: dynatrace/easytrade-loadgen
     newTag: latest
-  - name: easytrade/loginservice
+  - name: loginservice
     newName: dynatrace/easytrade-loginservice
     newTag: latest
-  - name: easytrade/manager
+  - name: manager
     newName: dynatrace/easytrade-manager
     newTag: latest
-  - name: easytrade/offerservice
+  - name: offerservice
     newName: dynatrace/easytrade-offerservice
     newTag: latest
-  - name: easytrade/pricing-service
+  - name: pricing-service
     newName: dynatrace/easytrade-pricing-service
     newTag: latest
-  - name: easytrade/problem-operator
+  - name: problem-operator
     newName: dynatrace/easytrade-problem-operator
     newTag: latest
-  - name: easytrade/rabbitmq
+  - name: rabbitmq
     newName: dynatrace/easytrade-rabbitmq
     newTag: latest
-  - name: easytrade/third-party-service
+  - name: third-party-service
     newName: dynatrace/easytrade-third-party-service
     newTag: latest
