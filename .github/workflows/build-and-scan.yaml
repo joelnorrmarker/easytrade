@@ -1,0 +1,47 @@
+name: Build, Scan, and Publish
+on:
+  push:
+    branches: ['main']
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 1. Login to GitHub's Container Registry
+      - name: Log in to the Container registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # 2. Build the Docker Image
+      - name: Build Docker Image
+        run: docker build . -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:main
+
+      # 3. WIZ SECURITY SCAN
+      # This uses the 'JN-github-action-sa' credentials you saved in secrets
+      - name: Download Wiz CLI
+        run: curl -o wiz https://wiz.io/wiz && chmod +x wiz
+
+      - name: Authenticate Wiz
+        run: ./wiz auth --id ${{ secrets.WIZ_CLIENT_ID }} --secret ${{ secrets.WIZ_CLIENT_SECRET }}
+
+      - name: Run Wiz Container Scan
+        # Scans the image. Fails the pipeline if Critical issues are found.
+        run: ./wiz docker scan --image ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:main --policy "Default Policy"
+
+      # 4. Push the Image (Only happens if Wiz scan passes)
+      - name: Push Docker image
+        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:main
