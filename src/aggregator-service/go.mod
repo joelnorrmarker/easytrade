@@ -11,6 +11,6 @@ require (
 
 require (
 	go.uber.org/multierr v1.11.0 // indirect
-	golang.org/x/sys v0.34.0 // indirect
-	golang.org/x/text v0.27.0 // indirect
+	golang.org/x/sys v0.44.0 // indirect
+	golang.org/x/text v0.41.0 // indirect
 )
